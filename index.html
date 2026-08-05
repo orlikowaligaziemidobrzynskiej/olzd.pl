@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orlikowa Liga Ziemi Dobrzyńskiej</title>
+<link rel="icon" href="images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-top:#ffffff;
+  --bg-bottom:#e3e3e3;
+  --ink:#212121;
+  --ink-soft:#5c5a55;
+  --gold:#d7c4a3;
+  --gold-dark:#b89a72;
+  --gold-deep:#8a6f4d;
+  --line:rgba(33,33,33,.12);
+  --panel:#ffffffcc;
+  --radius:2px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Work Sans',sans-serif;
+  color:var(--ink);
+  background:linear-gradient(180deg,var(--bg-top) 0%, var(--bg-bottom) 100%) fixed;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4,.display{
+  font-family:'Oswald',sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  font-weight:600;
+}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;}
+img{max-width:100%;display:block;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+
+/* ---------- topbar ---------- */
+.topbar{
+  background:var(--ink);
+  color:#f2f0ec;
+  font-size:12.5px;
+  letter-spacing:.04em;
+}
+.topbar .wrap{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:8px;padding-bottom:8px;
+  flex-wrap:wrap;gap:8px;
+}
+.topbar .social{display:flex;gap:14px;align-items:center;}
+.topbar .social a{
+  display:flex;align-items:center;gap:6px;
+  color:#f2f0ec;opacity:.85;transition:opacity .2s, color .2s;
+}
+.topbar .social a:hover{opacity:1;color:var(--gold);}
+.topbar svg{width:16px;height:16px;fill:currentColor;}
+
+/* ---------- header / nav ---------- */
+header.site{
+  position:sticky;top:0;z-index:60;
+  background:rgba(255,255,255,.88);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 0;
+}
+.brand{display:flex;align-items:center;gap:12px;}
+.brand img{height:46px;width:auto;}
+.brand .name{
+  font-family:'Oswald',sans-serif;
+  font-weight:600;
+  font-size:15px;
+  line-height:1.15;
+  letter-spacing:.02em;
+}
+.brand .name span{display:block;color:var(--gold-deep);font-size:12px;letter-spacing:.12em;}
+
+nav.main{display:flex;gap:2px;align-items:center;}
+nav.main a{
+  position:relative;
+  font-family:'Oswald',sans-serif;
+  font-size:13px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  padding:10px 14px;
+  color:var(--ink);
+  transition:color .2s;
+}
+nav.main a::after{
+  content:"";position:absolute;left:14px;right:14px;bottom:6px;height:2px;
+  background:var(--gold-dark);transform:scaleX(0);transform-origin:left;
+  transition:transform .25s ease;
+}
+nav.main a:hover{color:var(--gold-deep);}
+nav.main a:hover::after,nav.main a.active::after{transform:scaleX(1);}
+nav.main a.active{color:var(--gold-deep);}
+
+.burger{display:none;background:none;border:none;padding:8px;}
+.burger span{display:block;width:24px;height:2px;background:var(--ink);margin:5px 0;transition:.25s;}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;overflow:hidden;
+  padding:88px 0 70px;
+  text-align:center;
+  border-bottom:1px solid var(--line);
+}
+.hero .wing{
+  position:absolute;top:50%;left:50%;
+  width:900px;max-width:140vw;
+  transform:translate(-50%,-50%);
+  opacity:.06;pointer-events:none;
+  filter:grayscale(1);
+}
+.hero .eyebrow{
+  font-family:'Oswald',sans-serif;
+  letter-spacing:.3em;font-size:12px;color:var(--gold-deep);
+  margin-bottom:18px;
+}
+.hero h1{
+  font-size:clamp(34px,6vw,64px);
+  line-height:1.05;
+  position:relative;
+}
+.hero h1 em{
+  font-style:normal;color:var(--gold-deep);
+  display:block;
+}
+.hero p.lead{
+  max-width:560px;margin:22px auto 0;
+  color:var(--ink-soft);font-size:16px;line-height:1.6;
+}
+.hero .cta-row{
+  margin-top:34px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
+}
+.btn{
+  font-family:'Oswald',sans-serif;
+  font-size:13px;letter-spacing:.08em;text-transform:uppercase;
+  padding:13px 26px;
+  border:1px solid var(--ink);
+  clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);
+  transition:background .2s,color .2s,transform .2s;
+  display:inline-block;
+}
+.btn.primary{background:var(--ink);color:#fff;border-color:var(--ink);}
+.btn.primary:hover{background:var(--gold-deep);border-color:var(--gold-deep);transform:translateY(-2px);}
+.btn.ghost{background:rgba(255,255,255,.5);color:var(--ink);border:1.5px solid var(--gold-dark);box-shadow:0 1px 0 rgba(33,33,33,.06);}
+.btn.ghost:hover{background:var(--ink);color:#fff;border-color:var(--ink);transform:translateY(-2px);box-shadow:0 10px 22px -14px rgba(33,33,33,.5);}
+
+/* ---------- section shell ---------- */
+main{flex:1;}
+.section{padding:64px 0;}
+.section.tight{padding:40px 0;}
+.section-head{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:20px;margin-bottom:30px;flex-wrap:wrap;
+  border-bottom:2px solid var(--ink);
+  padding-bottom:14px;
+}
+.section-head .tag{
+  font-size:11px;letter-spacing:.25em;color:var(--gold-deep);
+  font-family:'Oswald',sans-serif;display:block;margin-bottom:6px;
+}
+.section-head h2{font-size:clamp(24px,3.2vw,34px);}
+.section-head p{color:var(--ink-soft);font-size:14px;max-width:420px;}
+
+/* quick links */
+.quick-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:18px;
+}
+.quick-card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  clip-path:polygon(18px 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%,0 18px);
+  padding:26px 22px;
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s;
+  opacity:0;transform:translateY(16px);
+}
+.quick-card.in{opacity:1;transform:none;}
+.quick-card:hover{transform:translateY(-6px);box-shadow:0 14px 30px -18px rgba(0,0,0,.35);border-color:var(--gold-dark);}
+.quick-card .num{
+  font-family:'Oswald',sans-serif;color:var(--gold-dark);font-size:13px;letter-spacing:.15em;margin-bottom:14px;
+}
+.quick-card h3{font-size:19px;margin-bottom:8px;}
+.quick-card p{color:var(--ink-soft);font-size:13.5px;line-height:1.5;}
+
+/* ---------- table (standings) ---------- */
+.table-wrap{
+  background:var(--panel);border:1px solid var(--line);
+  clip-path:polygon(20px 0,100% 0,100% calc(100% - 20px),calc(100% - 20px) 100%,0 100%,0 20px);
+  overflow-x:auto;
+}
+table.standings{width:100%;border-collapse:collapse;min-width:640px;}
+table.standings thead th{
+  font-family:'Oswald',sans-serif;font-size:11.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:#fff;background:var(--ink);
+  padding:14px 12px;text-align:center;white-space:nowrap;
+}
+table.standings thead th:nth-child(2){text-align:left;}
+table.standings tbody td{
+  padding:12px;text-align:center;font-size:14px;border-bottom:1px solid var(--line);
+}
+table.standings tbody tr:last-child td{border-bottom:none;}
+table.standings tbody tr:hover{background:#f6f0e6;}
+table.standings td.team{text-align:left;display:flex;align-items:center;gap:10px;font-weight:500;cursor:pointer;}
+table.standings td.team img{width:26px;height:26px;object-fit:contain;}
+table.standings td.team .badge-fallback{
+  width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--gold);
+  display:flex;align-items:center;justify-content:center;font-size:10px;font-family:'Oswald',sans-serif;
+  flex-shrink:0;
+}
+table.standings td.pos{font-family:'Oswald',sans-serif;color:var(--gold-deep);font-weight:600;}
+table.standings td.pts{font-weight:700;}
+.pos-badge{
+  display:inline-block;margin-left:10px;padding:3px 9px;
+  font-family:'Oswald',sans-serif;font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+  border-radius:2px;vertical-align:middle;
+}
+.pos-badge.champ{background:var(--gold-dark);color:#fff;}
+.pos-badge.promote{background:transparent;color:var(--gold-deep);border:1px solid var(--gold-dark);}
+.pos-badge.relegate{background:var(--ink);color:var(--gold);}
+.table-legend{display:flex;gap:22px;flex-wrap:wrap;padding:14px 4px 0;font-size:12px;color:var(--ink-soft);}
+.table-legend span{display:flex;align-items:center;gap:7px;}
+.table-legend .dot{width:9px;height:9px;border-radius:2px;display:inline-block;}
+.table-legend .dot.champ{background:var(--gold-dark);}
+.table-legend .dot.promote{background:transparent;border:1px solid var(--gold-dark);}
+.table-legend .dot.relegate{background:var(--ink);}
+
+.fixtures-wrap{
+  background:var(--panel);border:1px solid var(--line);
+  clip-path:polygon(20px 0,100% 0,100% calc(100% - 20px),calc(100% - 20px) 100%,0 100%,0 20px);
+  overflow:hidden;
+}
+.fixtures-head{
+  font-family:'Oswald',sans-serif;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:#fff;background:var(--ink);padding:13px 20px;
+}
+.fixture-row{
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:14px;
+  padding:18px 22px;border-bottom:1px solid var(--line);
+  cursor:pointer;transition:background .2s;
+}
+.fixture-row:hover{background:#f6f0e6;}
+.fixture-row.bye{cursor:default;}
+.fixture-row.bye:hover{background:#f6f0e6;}
+.fixture-row:last-child{border-bottom:none;}
+.fixture-row.bye{background:#f6f0e6;}
+.fixture-team{
+  display:flex;align-items:center;gap:12px;font-size:15px;font-weight:500;cursor:pointer;
+}
+.fixture-team.away{justify-content:flex-end;text-align:right;}
+.fixture-team img{width:32px;height:32px;object-fit:contain;flex-shrink:0;}
+.fixture-team .badge-fallback{width:32px;height:32px;font-size:10px;}
+.fixture-mid{text-align:center;min-width:150px;}
+.fixture-mid .vs{
+  display:block;font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:.1em;color:var(--gold-deep);
+}
+.fixture-mid .venue{display:block;font-size:11.5px;color:var(--ink-soft);margin-top:3px;}
+@media(max-width:640px){
+  .fixture-row{grid-template-columns:1fr;text-align:center;}
+  .fixture-team.away{justify-content:center;text-align:center;}
+  .fixture-mid{margin:6px 0;}
+}
+
+.empty-state{
+  padding:60px 30px;text-align:center;color:var(--ink-soft);
+}
+.empty-state .mark{
+  font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:.2em;color:var(--gold-deep);
+  display:block;margin-bottom:10px;
+}
+.empty-state h3{color:var(--ink);font-size:20px;margin-bottom:8px;}
+
+/* ---------- teams grid ---------- */
+.teams-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:16px;
+}
+.team-card{
+  background:var(--panel);border:1px solid var(--line);
+  padding:22px 14px 18px;text-align:center;
+  clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px);
+  transition:transform .25s, box-shadow .25s, border-color .25s;
+  opacity:0;transform:translateY(14px);
+}
+.team-card.in{opacity:1;transform:none;}
+.team-card:hover{transform:translateY(-6px);border-color:var(--gold-dark);box-shadow:0 14px 26px -18px rgba(0,0,0,.35);}
+.team-card .crest{
+  width:74px;height:74px;margin:0 auto 14px;
+  display:flex;align-items:center;justify-content:center;
+}
+.team-card .crest img{max-width:100%;max-height:100%;object-fit:contain;}
+.team-card .crest .badge-fallback-lg{
+  width:74px;height:74px;border-radius:50%;background:var(--ink);color:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Oswald',sans-serif;font-size:20px;letter-spacing:.03em;
+}
+.team-card h4{font-size:14px;line-height:1.3;}
+
+/* ---------- club page ---------- */
+.club-hero{
+  display:flex;align-items:center;gap:26px;flex-wrap:wrap;
+  padding:50px 0 34px;border-bottom:1px solid var(--line);
+}
+.club-hero .crest-lg{width:110px;height:110px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.club-hero .crest-lg img{max-width:100%;max-height:100%;object-fit:contain;}
+.club-hero .crest-lg .badge-fallback-xl{
+  width:110px;height:110px;border-radius:50%;background:var(--ink);color:var(--gold);
+  display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-size:26px;
+}
+.club-hero .info .eyebrow{font-size:11px;letter-spacing:.25em;color:var(--gold-deep);font-family:'Oswald',sans-serif;margin-bottom:8px;}
+.club-hero .info h1{font-size:clamp(26px,4vw,42px);}
+
+.match-hero{
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;
+  padding:44px 0;border-bottom:1px solid var(--line);text-align:center;
+}
+.match-side{display:flex;flex-direction:column;align-items:center;gap:12px;transition:transform .2s;}
+.match-side:hover{transform:translateY(-3px);}
+.match-crest{width:84px;height:84px;display:flex;align-items:center;justify-content:center;}
+.match-crest img{max-width:100%;max-height:100%;object-fit:contain;}
+.match-crest .badge-fallback{width:84px;height:84px;font-size:20px;}
+.match-side h2{font-size:clamp(15px,2vw,20px);}
+.match-mid{display:flex;flex-direction:column;align-items:center;gap:4px;}
+.match-round{font-size:11px;letter-spacing:.1em;color:var(--gold-deep);font-family:'Oswald',sans-serif;text-transform:uppercase;margin-bottom:6px;}
+.match-vs{font-family:'Oswald',sans-serif;font-size:32px;color:var(--ink);}
+.match-info{font-size:12px;color:var(--ink-soft);}
+@media(max-width:700px){
+  .match-hero{grid-template-columns:1fr;}
+}
+.crumbs{font-size:12px;color:var(--ink-soft);letter-spacing:.05em;padding-top:22px;}
+.crumbs a{color:var(--gold-deep);}
+.crumbs a:hover{text-decoration:underline;}
+
+.tabs{display:flex;border-bottom:1px solid var(--line);margin-bottom:28px;overflow-x:auto;}
+.tabs button{
+  background:none;border:none;padding:16px 22px;font-family:'Oswald',sans-serif;
+  font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);
+  border-bottom:2px solid transparent;white-space:nowrap;transition:.2s;
+}
+.tabs button:hover{color:var(--ink);}
+.tabs button.active{color:var(--ink);border-color:var(--gold-dark);}
+
+table.roster{width:100%;border-collapse:collapse;min-width:920px;}
+table.roster thead th{
+  font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:#fff;background:var(--ink);padding:12px 10px;text-align:center;white-space:nowrap;
+}
+table.roster thead th:nth-child(2){text-align:left;}
+table.roster thead th.sortable{cursor:pointer;user-select:none;transition:background .2s,color .2s;}
+table.roster thead th.sortable:hover{background:var(--gold-deep);}
+table.roster thead th.sortable.active{background:var(--gold-dark);color:#212121;}
+table.roster thead th .arrow{margin-left:4px;font-size:9px;}
+table.roster tbody td{padding:12px 10px;text-align:center;font-size:13.5px;border-bottom:1px solid var(--line);}
+table.roster td.player{text-align:left;display:flex;align-items:center;gap:10px;cursor:pointer;font-weight:500;}
+table.roster tbody tr:hover{background:#f6f0e6;}
+.avatar-sm{
+  width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--gold);
+  display:flex;align-items:center;justify-content:center;font-size:11px;font-family:'Oswald',sans-serif;flex-shrink:0;
+}
+.cap-tag{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:18px;height:18px;border-radius:50%;background:var(--gold-dark);color:#fff;
+  font-family:'Oswald',sans-serif;font-size:10px;font-weight:700;vertical-align:middle;
+}
+
+/* ---------- player page ---------- */
+.player-hero{
+  display:grid;grid-template-columns:220px 1fr;gap:40px;
+  padding:50px 0;border-bottom:1px solid var(--line);
+  align-items:center;
+}
+.player-hero .photo{
+  width:220px;height:220px;border-radius:50%;
+  background:linear-gradient(160deg,var(--ink),#3a3733);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold);font-family:'Oswald',sans-serif;font-size:64px;
+  border:4px solid var(--gold-dark);
+}
+.player-hero h1{font-size:clamp(28px,4.4vw,46px);}
+.player-hero .num{color:var(--gold-deep);font-family:'Oswald',sans-serif;font-size:16px;letter-spacing:.1em;margin-bottom:4px;}
+.player-meta{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:14px 40px;margin-top:22px;
+}
+.player-meta div{border-bottom:1px solid var(--line);padding-bottom:10px;}
+.player-meta .k{font-size:11px;letter-spacing:.12em;color:var(--gold-deep);font-family:'Oswald',sans-serif;display:block;margin-bottom:4px;}
+.player-meta .v{font-size:15px;font-weight:500;}
+
+.stat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:36px;}
+.stat-box{
+  background:var(--panel);border:1px solid var(--line);padding:22px 12px;text-align:center;
+  clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);
+}
+.stat-box .val{font-family:'Oswald',sans-serif;font-size:30px;color:var(--gold-deep);}
+.stat-box .lab{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-top:6px;}
+
+/* ---------- info / rules pages ---------- */
+.prose{max-width:760px;}
+.prose h3{font-size:19px;margin:30px 0 12px;}
+.prose h3:first-child{margin-top:0;}
+.prose p{color:var(--ink-soft);line-height:1.75;font-size:15px;margin-bottom:12px;}
+.prose ul{margin:0 0 12px 20px;color:var(--ink-soft);font-size:15px;line-height:1.75;}
+.contact-strip{
+  margin-top:40px;padding:26px;background:var(--ink);color:#f2f0ec;
+  clip-path:polygon(16px 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%,0 16px);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
+}
+.contact-strip a{color:var(--gold);font-weight:500;}
+.contact-strip a:hover{text-decoration:underline;}
+
+/* ---------- footer ---------- */
+footer.site{
+  background:var(--ink);color:#cfcbc3;margin-top:auto;
+}
+footer.site .wrap{padding:50px 24px 26px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px;}
+footer.site .fbrand{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+footer.site .fbrand img{height:40px;filter:invert(1) brightness(2);}
+footer.site .fbrand span{font-family:'Oswald',sans-serif;color:#fff;font-size:14px;}
+footer.site p{font-size:13px;line-height:1.7;color:#a7a29a;max-width:280px;}
+footer.site h5{font-family:'Oswald',sans-serif;color:#fff;font-size:12.5px;letter-spacing:.12em;margin-bottom:14px;}
+footer.site ul{list-style:none;}
+footer.site li{margin-bottom:9px;}
+footer.site a{font-size:13.5px;color:#cfcbc3;transition:color .2s;}
+footer.site a:hover{color:var(--gold);}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.1);
+  padding:18px 24px;font-size:12px;color:#8b877f;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+}
+
+/* ---------- cookie banner ---------- */
+.cookie-banner{
+  position:fixed;left:0;right:0;bottom:0;z-index:100;
+  background:var(--ink);color:#f2f0ec;
+  padding:18px 24px;
+  display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap;
+  transform:translateY(100%);transition:transform .4s ease;
+  border-top:2px solid var(--gold-dark);
+}
+.cookie-banner.show{transform:translateY(0);}
+.cookie-banner p{font-size:13px;max-width:640px;line-height:1.6;color:#e6e3dc;}
+.cookie-banner strong{color:var(--gold);}
+.cookie-banner .btn{padding:11px 22px;font-size:12px;flex-shrink:0;}
+
+/* ---------- misc ---------- */
+.fade-up{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
+.fade-up.in{opacity:1;transform:none;}
+
+@media(max-width:900px){
+  .quick-grid{grid-template-columns:repeat(2,1fr);}
+  .teams-grid{grid-template-columns:repeat(3,1fr);}
+  footer.site .wrap{grid-template-columns:1fr;}
+  .player-hero{grid-template-columns:1fr;text-align:center;}
+  .player-hero .photo{margin:0 auto;}
+  .player-meta{grid-template-columns:1fr;}
+}
+@media(max-width:760px){
+  nav.main{
+    position:fixed;top:96px;left:0;right:0;bottom:0;
+    background:#fffdfa;flex-direction:column;align-items:stretch;
+    padding:10px 24px;gap:0;
+    transform:translateX(100%);transition:transform .3s ease;
+    overflow-y:auto;
+  }
+  nav.main.open{transform:translateX(0);}
+  nav.main a{padding:16px 0;border-bottom:1px solid var(--line);}
+  .burger{display:block;}
+  .teams-grid{grid-template-columns:repeat(2,1fr);}
+  .quick-grid{grid-template-columns:1fr;}
+  .stat-grid{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <span>Sezon Jesień 2026</span>
+    <div class="social">
+      <a href="https://www.facebook.com/profile.php?id=61591739747825" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06C2 17.08 5.66 21.23 10.44 22v-7.03H7.9v-2.91h2.54V9.85c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22C18.34 21.23 22 17.08 22 12.06z"/></svg>
+        Facebook
+      </a>
+      <a href="https://www.instagram.com/olzd.pl/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2c2.71 0 3.05.01 4.12.06 1.07.05 1.79.22 2.43.46.66.26 1.21.6 1.76 1.15.5.5.9 1.1 1.15 1.76.24.64.41 1.36.46 2.43.05 1.07.06 1.41.06 4.12s-.01 3.05-.06 4.12c-.05 1.07-.22 1.79-.46 2.43a4.9 4.9 0 0 1-1.15 1.76 4.9 4.9 0 0 1-1.76 1.15c-.64.24-1.36.41-2.43.46-1.07.05-1.41.06-4.12.06s-3.05-.01-4.12-.06c-1.07-.05-1.79-.22-2.43-.46a4.9 4.9 0 0 1-1.76-1.15 4.9 4.9 0 0 1-1.15-1.76c-.24-.64-.41-1.36-.46-2.43C2.01 15.05 2 14.71 2 12s.01-3.05.06-4.12c.05-1.07.22-1.79.46-2.43.26-.66.6-1.21 1.15-1.76.5-.5 1.1-.9 1.76-1.15.64-.24 1.36-.41 2.43-.46C8.95 2.01 9.29 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.17 1.17 0 1 1-2.34 0 1.17 1.17 0 0 1 2.34 0z"/></svg>
+        Instagram
+      </a>
+      <a href="mailto:orlikowaligaziemidobrzynskiej@onet.pl">
+        <svg viewBox="0 0 24 24"><path d="M2 5.5A2.5 2.5 0 0 1 4.5 3h15A2.5 2.5 0 0 1 22 5.5v13a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 18.5v-13zm2.2.3 7.8 6 7.8-6H4.2zM20 7.3l-7.4 5.7a1 1 0 0 1-1.2 0L4 7.3V18.5c0 .3.2.5.5.5h15c.3 0 .5-.2.5-.5V7.3z"/></svg>
+        Napisz do nas
+      </a>
+    </div>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <a href="#home" class="brand">
+      <img src="images/logo.png" alt="Orlikowa Liga Ziemi Dobrzyńskiej">
+      <div class="name">Orlikowa Liga<span>Ziemi Dobrzyńskiej</span></div>
+    </a>
+    <nav class="main" id="mainNav">
+      <a href="#home" data-route="home">Start</a>
+      <a href="#liga/1" data-route="liga1">1. Liga</a>
+      <a href="#liga/2" data-route="liga2">2. Liga</a>
+      <a href="#zespoly" data-route="zespoly">Zespoły i Statystyki</a>
+      <a href="#terminarz" data-route="terminarz">Terminarz</a>
+      <a href="#informacje" data-route="informacje">Informacje</a>
+      <a href="#regulamin" data-route="regulamin">Regulamin</a>
+    </nav>
+    <button class="burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<footer class="site">
+  <div class="wrap">
+    <div>
+      <div class="fbrand"><img src="images/logo.png" alt="Logo"><span>Orlikowa Liga<br>Ziemi Dobrzyńskiej</span></div>
+      <p>Amatorska liga piłkarska rozgrywana na obiektach Orlik. Dwie klasy rozgrywkowe, lokalne drużyny i prawdziwa rywalizacja na boisku.</p>
+    </div>
+    <div>
+      <h5>Rozgrywki</h5>
+      <ul>
+        <li><a href="#liga/1">1. Liga</a></li>
+        <li><a href="#liga/2">2. Liga</a></li>
+        <li><a href="#zespoly">Zespoły i statystyki</a></li>
+        <li><a href="#terminarz">Terminarz</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Liga</h5>
+      <ul>
+        <li><a href="#informacje">Informacje</a></li>
+        <li><a href="#regulamin">Regulamin</a></li>
+        <li><a href="mailto:orlikowaligaziemidobrzynskiej@onet.pl">Kontakt</a></li>
+        <li><a href="https://www.facebook.com/profile.php?id=61591739747825" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="https://www.instagram.com/olzd.pl/" target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom wrap" style="max-width:1180px;margin:0 auto;">
+    <span id="year"></span>
+    <span>Strona korzysta z plików cookie — szczegóły w zakładce Informacje.</span>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner">
+  <p><strong>Ta strona korzysta z plików cookie.</strong> Używamy ich wyłącznie do zapewnienia poprawnego działania serwisu oraz zapamiętania Twoich preferencji. Korzystając dalej ze strony, wyrażasz na to zgodę. Więcej informacji znajdziesz w zakładce „Informacje”.</p>
+  <button class="btn primary" id="cookieAccept">Rozumiem i akceptuję</button>
+</div>
+
+<script>
+/* ================= DATA ================= */
+const CLUBS = [
+  {slug:'betonboys', name:'BetonBoys', logo:'images/betonboys.png', league:1},
+  {slug:'iskra-dulsk', name:'Iskra Dulsk', logo:'images/iskradulsk.png', league:1},
+  {slug:'spucha-golebie', name:'Spucha Gołębie', logo:'images/spuchagolebie.png', league:1},
+  {slug:'unia-wikingi-radomin', name:'Unia Wikingi Radomin', logo:'images/uniawikingiradomin.png', league:1},
+  {slug:'wks-harnas-wojnowo', name:'WKS Harnaś Wojnowo', logo:'images/wksharnaswojnowo.png', league:1},
+  {slug:'wks-herbatniki', name:'WKS Herbatniki', logo:'images/wksherbatniki.png', league:1},
+  {slug:'wks-plonne', name:'WKS Płonne', logo:'images/wksplonne.png', league:1},
+  {slug:'cytryna-team', name:'Cytryna Team', logo:'images/cytrynateam.png', league:2},
+  {slug:'fc-marcelki', name:'FC Marcelki', logo:'images/fcmarcelki.png', league:2},
+  {slug:'fc-sikorz', name:'FC Sikórz', logo:'images/fcsikorz.png', league:2},
+  {slug:'fc-swistak', name:'FC Świstak', logo:'images/fcswistak.png', league:2},
+  {slug:'ks-mlyn-kielbzak', name:'KS Młyn Kiełbzak', logo:'images/ksmlynkielbzak.png', league:2},
+  {slug:'ks-rycerze', name:'KS Rycerze', logo:'images/ksrycerze.png', league:2},
+  {slug:'ks-szczupaki', name:'KS Szczupaki', logo:'images/ksszczupaki.png', league:2},
+].sort((a,b)=>a.name.localeCompare(b.name,'pl'));
+
+const PLAYERS = [
+  /* KS Młyn Kiełbzak */
+  {slug:'sebastian-rogozinski', name:'Sebastian Rogoziński', club:'ks-mlyn-kielbzak', number:1, age:14, position:'Bramkarz'},
+  {slug:'jakub-skonieczny', name:'Jakub Skonieczny', club:'ks-mlyn-kielbzak', number:4, age:19, position:'Zawodnik z pola'},
+  {slug:'krystian-dabrowski', name:'Krystian Dąbrowski', club:'ks-mlyn-kielbzak', number:6, age:21, position:'Zawodnik z pola'},
+  {slug:'adrian-stachowski', name:'Adrian Stachowski', club:'ks-mlyn-kielbzak', number:7, age:19, position:'Zawodnik z pola'},
+  {slug:'jakub-stachowski', name:'Jakub Stachowski', club:'ks-mlyn-kielbzak', number:8, age:25, position:'Zawodnik z pola'},
+  {slug:'igor-michalak', name:'Igor Michalak', club:'ks-mlyn-kielbzak', number:9, age:15, position:'Zawodnik z pola'},
+  {slug:'radoslaw-rutkowski', name:'Radosław Rutkowski', club:'ks-mlyn-kielbzak', number:10, age:21, position:'Zawodnik z pola'},
+  {slug:'mateusz-urbanski', name:'Mateusz Urbański', club:'ks-mlyn-kielbzak', number:11, age:23, position:'Zawodnik z pola'},
+  {slug:'kacper-stachowski', name:'Kacper Stachowski', club:'ks-mlyn-kielbzak', number:13, age:19, position:'Zawodnik z pola', captain:true},
+  {slug:'filip-uzarewicz', name:'Filip Uzarewicz', club:'ks-mlyn-kielbzak', number:17, age:17, position:'Zawodnik z pola'},
+  {slug:'grzegorz-wojciechowski', name:'Grzegorz Wojciechowski', club:'ks-mlyn-kielbzak', number:19, age:20, position:'Zawodnik z pola'},
+  {slug:'adrian-wesolowski', name:'Adrian Wesołowski', club:'ks-mlyn-kielbzak', number:21, age:20, position:'Zawodnik z pola'},
+  {slug:'adam-fidler', name:'Adam Fidler', club:'ks-mlyn-kielbzak', number:98, age:15, position:'Bramkarz'},
+
+  /* Iskra Dulsk */
+  {slug:'bartlomiej-kozlowski', name:'Bartłomiej Kozłowski', club:'iskra-dulsk', number:1, age:31, position:'Bramkarz'},
+  {slug:'kacper-predenkiewicz', name:'Kacper Predenkiewicz', club:'iskra-dulsk', number:4, age:22, position:'Zawodnik z pola', captain:true},
+  {slug:'konrad-ochal', name:'Konrad Ochal', club:'iskra-dulsk', number:7, age:18, position:'Zawodnik z pola'},
+  {slug:'wiktor-bolewski', name:'Wiktor Bolewski', club:'iskra-dulsk', number:8, age:18, position:'Zawodnik z pola'},
+  {slug:'mikolaj-jarecki', name:'Mikołaj Jarecki', club:'iskra-dulsk', number:10, age:17, position:'Zawodnik z pola'},
+  {slug:'mikolaj-motycki', name:'Mikołaj Motycki', club:'iskra-dulsk', number:11, age:19, position:'Zawodnik z pola'},
+  {slug:'damian-modrzynski', name:'Damian Modrzyński', club:'iskra-dulsk', number:16, age:27, position:'Zawodnik z pola'},
+  {slug:'lukasz-zoltewicz', name:'Łukasz Żółtewicz', club:'iskra-dulsk', number:21, age:26, position:'Zawodnik z pola'},
+  {slug:'jonasz-klonowski', name:'Jonasz Klonowski', club:'iskra-dulsk', number:76, age:21, position:'Zawodnik z pola'},
+
+  /* WKS Herbatniki */
+  {slug:'aleksander-mackowiak', name:'Aleksander Maćkowiak', club:'wks-herbatniki', number:1, age:18, position:'Bramkarz', captain:true},
+  {slug:'jakub-pizewski', name:'Jakub Piżewski', club:'wks-herbatniki', number:6, age:18, position:'Zawodnik z pola'},
+  {slug:'mateusz-witkowski', name:'Mateusz Witkowski', club:'wks-herbatniki', number:7, age:17, position:'Zawodnik z pola'},
+  {slug:'szymon-marunowski', name:'Szymon Marunowski', club:'wks-herbatniki', number:8, age:17, position:'Zawodnik z pola'},
+  {slug:'sebastian-chalinski', name:'Sebastian Chaliński', club:'wks-herbatniki', number:9, age:18, position:'Zawodnik z pola'},
+  {slug:'szymon-adamczyk', name:'Szymon Adamczyk', club:'wks-herbatniki', number:10, age:18, position:'Zawodnik z pola'},
+  {slug:'dominik-malec', name:'Dominik Malec', club:'wks-herbatniki', number:11, age:19, position:'Zawodnik z pola'},
+  {slug:'bartosz-witkowski', name:'Bartosz Witkowski', club:'wks-herbatniki', number:18, age:18, position:'Zawodnik z pola'},
+  {slug:'wieslaw-malec', name:'Wiesław Malec', club:'wks-herbatniki', number:47, age:39, position:'Zawodnik z pola'},
+  {slug:'jakub-gasiorowski', name:'Jakub Gąsiorowski', club:'wks-herbatniki', number:67, age:17, position:'Zawodnik z pola'},
+  {slug:'hubert-wronski', name:'Hubert Wroński', club:'wks-herbatniki', number:68, age:17, position:'Zawodnik z pola'},
+  {slug:'bartosz-laskowski', name:'Bartosz Laskowski', club:'wks-herbatniki', number:69, age:17, position:'Zawodnik z pola'},
+  {slug:'patryk-juszczak', name:'Patryk Juszczak', club:'wks-herbatniki', number:88, age:20, position:'Zawodnik z pola'},
+  {slug:'wiktor-smoczynski', name:'Wiktor Smoczyński', club:'wks-herbatniki', number:96, age:19, position:'Zawodnik z pola'},
+  {slug:'jakub-grochocki', name:'Jakub Grochocki', club:'wks-herbatniki', number:99, age:18, position:'Bramkarz'},
+
+  /* BetonBoys */
+  {slug:'maciej-owsianikow', name:'Maciej Owsianikow', club:'betonboys', number:1, age:16, position:'Bramkarz'},
+  {slug:'adam-racinski', name:'Adam Raciński', club:'betonboys', number:2, age:16, position:'Zawodnik z pola'},
+  {slug:'grzegorz-tempinski', name:'Grzegorz Tempiński', club:'betonboys', number:3, age:15, position:'Zawodnik z pola', captain:true},
+  {slug:'antoni-zurawski', name:'Antoni Żurawski', club:'betonboys', number:4, age:15, position:'Zawodnik z pola'},
+  {slug:'cezary-swiadek', name:'Cezary Świadek', club:'betonboys', number:5, age:15, position:'Zawodnik z pola'},
+  {slug:'michal-witkowski-betonboys', name:'Michał Witkowski', club:'betonboys', number:6, age:15, position:'Zawodnik z pola'},
+  {slug:'szymon-hejnowski', name:'Szymon Hejnowski', club:'betonboys', number:7, age:16, position:'Zawodnik z pola'},
+  {slug:'kacper-roslaniec', name:'Kacper Rosłaniec', club:'betonboys', number:8, age:16, position:'Zawodnik z pola'},
+  {slug:'kacper-przybyszewski', name:'Kacper Przybyszewski', club:'betonboys', number:9, age:18, position:'Zawodnik z pola'},
+  {slug:'blazej-trzcionka', name:'Błażej Trzcionka', club:'betonboys', number:10, age:18, position:'Zawodnik z pola'},
+  {slug:'nikita-tereshchuk', name:'Nikita Tereshchuk', club:'betonboys', number:11, age:19, position:'Zawodnik z pola', nationality:'Ukraina'},
+  {slug:'tomasz-garkowski', name:'Tomasz Garkowski', club:'betonboys', number:12, age:16, position:'Zawodnik z pola'},
+  {slug:'jakub-bender', name:'Jakub Bender', club:'betonboys', number:14, age:16, position:'Zawodnik z pola'},
+  {slug:'przemyslaw-paczkowski', name:'Przemysław Paczkowski', club:'betonboys', number:15, age:16, position:'Zawodnik z pola'},
+  {slug:'aleksander-branicki', name:'Aleksander Branicki', club:'betonboys', number:16, age:16, position:'Bramkarz'},
+
+  /* KS Szczupaki */
+  {slug:'szymon-bolewski', name:'Szymon Bolewski', club:'ks-szczupaki', number:1, age:15, position:'Bramkarz'},
+  {slug:'maciej-wisniewski', name:'Maciej Wiśniewski', club:'ks-szczupaki', number:4, age:15, position:'Zawodnik z pola'},
+  {slug:'bartosz-mazurkiewicz', name:'Bartosz Mazurkiewicz', club:'ks-szczupaki', number:5, age:19, position:'Zawodnik z pola'},
+  {slug:'wiktor-zielinski', name:'Wiktor Zieliński', club:'ks-szczupaki', number:7, age:20, position:'Zawodnik z pola'},
+  {slug:'julian-szymanski', name:'Julian Szymański', club:'ks-szczupaki', number:8, age:14, position:'Zawodnik z pola'},
+  {slug:'jakub-bolewski', name:'Jakub Bolewski', club:'ks-szczupaki', number:9, age:18, position:'Zawodnik z pola', captain:true},
+  {slug:'hubert-wichrowski', name:'Hubert Wichrowski', club:'ks-szczupaki', number:10, age:23, position:'Zawodnik z pola'},
+  {slug:'jan-szymanski', name:'Jan Szymański', club:'ks-szczupaki', number:11, age:16, position:'Zawodnik z pola'},
+  {slug:'lukasz-strzelecki', name:'Łukasz Strzelecki', club:'ks-szczupaki', number:12, age:23, position:'Bramkarz'},
+  {slug:'przemyslaw-rutkowski', name:'Przemysław Rutkowski', club:'ks-szczupaki', number:13, age:36, position:'Zawodnik z pola'},
+  {slug:'bartosz-lipinski', name:'Bartosz Lipiński', club:'ks-szczupaki', number:15, age:29, position:'Zawodnik z pola'},
+  {slug:'kamil-plocharski', name:'Kamil Płocharski', club:'ks-szczupaki', number:22, age:23, position:'Zawodnik z pola'},
+  {slug:'oskar-zielinski', name:'Oskar Zieliński', club:'ks-szczupaki', number:67, age:16, position:'Zawodnik z pola'},
+
+  /* KS Rycerze */
+  {slug:'maciej-szczutkowski', name:'Maciej Szczutkowski', club:'ks-rycerze', number:1, age:16, position:'Bramkarz'},
+  {slug:'piotr-pastryk', name:'Piotr Pastryk', club:'ks-rycerze', number:2, age:17, position:'Bramkarz'},
+  {slug:'aleks-rojek', name:'Aleks Rojek', club:'ks-rycerze', number:4, age:17, position:'Zawodnik z pola'},
+  {slug:'szymon-natkowski', name:'Szymon Natkowski', club:'ks-rycerze', number:5, age:17, position:'Zawodnik z pola'},
+  {slug:'kacper-kaszuba', name:'Kacper Kaszuba', club:'ks-rycerze', number:6, age:13, position:'Zawodnik z pola'},
+  {slug:'igor-zuchowski', name:'Igor Żuchowski', club:'ks-rycerze', number:7, age:14, position:'Zawodnik z pola'},
+  {slug:'marcel-buczynski', name:'Marcel Buczyński', club:'ks-rycerze', number:8, age:13, position:'Zawodnik z pola'},
+  {slug:'marcel-spiewak', name:'Marcel Śpiewak', club:'ks-rycerze', number:9, age:14, position:'Zawodnik z pola'},
+  {slug:'tymon-kaliski', name:'Tymon Kaliski', club:'ks-rycerze', number:10, age:19, position:'Zawodnik z pola'},
+  {slug:'igor-cipkowski', name:'Igor Cipkowski', club:'ks-rycerze', number:11, age:16, position:'Zawodnik z pola'},
+  {slug:'hubert-prusinski', name:'Hubert Prusiński', club:'ks-rycerze', number:12, age:14, position:'Zawodnik z pola'},
+  {slug:'kacper-balinowski', name:'Kacper Balinowski', club:'ks-rycerze', number:13, age:17, position:'Zawodnik z pola'},
+  {slug:'michal-kwiatkowski', name:'Michał Kwiatkowski', club:'ks-rycerze', number:14, age:17, position:'Zawodnik z pola', captain:true},
+  {slug:'aleksander-malecki', name:'Aleksander Malecki', club:'ks-rycerze', number:15, age:16, position:'Zawodnik z pola'},
+  {slug:'oliwier-przychodny', name:'Oliwier Przychodny', club:'ks-rycerze', number:16, age:14, position:'Zawodnik z pola'},
+  {slug:'maciej-quaium', name:'Maciej Quaium', club:'ks-rycerze', number:17, age:19, position:'Zawodnik z pola'},
+
+  /* FC Sikórz */
+  {slug:'szymon-rogalski', name:'Szymon Rogalski', club:'fc-sikorz', number:1, age:15, position:'Bramkarz'},
+  {slug:'maciej-cylc', name:'Maciej Cylc', club:'fc-sikorz', number:2, age:16, position:'Zawodnik z pola'},
+  {slug:'kacper-umerle', name:'Kacper Umerle', club:'fc-sikorz', number:4, age:17, position:'Zawodnik z pola'},
+  {slug:'tomasz-maciejewski', name:'Tomasz Maciejewski', club:'fc-sikorz', number:5, age:17, position:'Zawodnik z pola'},
+  {slug:'marcel-wieczkowski', name:'Marcel Więczkowski', club:'fc-sikorz', number:6, age:18, position:'Zawodnik z pola'},
+  {slug:'hubert-lewandowski', name:'Hubert Lewandowski', club:'fc-sikorz', number:7, age:17, position:'Zawodnik z pola'},
+  {slug:'przemyslaw-zdrojewski', name:'Przemysław Zdrojewski', club:'fc-sikorz', number:8, age:17, position:'Zawodnik z pola'},
+  {slug:'mikolaj-kazanecki', name:'Mikołaj Kazanecki', club:'fc-sikorz', number:9, age:17, position:'Zawodnik z pola'},
+  {slug:'damian-kaminski', name:'Damian Kamiński', club:'fc-sikorz', number:10, age:17, position:'Zawodnik z pola', captain:true},
+  {slug:'patryk-lewandowski', name:'Patryk Lewandowski', club:'fc-sikorz', number:11, age:17, position:'Zawodnik z pola'},
+  {slug:'hubert-rogalski', name:'Hubert Rogalski', club:'fc-sikorz', number:12, age:17, position:'Zawodnik z pola'},
+  {slug:'kamil-rogalski', name:'Kamil Rogalski', club:'fc-sikorz', number:15, age:18, position:'Zawodnik z pola'},
+  {slug:'mateusz-politowski', name:'Mateusz Politowski', club:'fc-sikorz', number:17, age:18, position:'Zawodnik z pola'},
+  {slug:'kacper-rogalski', name:'Kacper Rogalski', club:'fc-sikorz', number:18, age:17, position:'Zawodnik z pola'},
+  {slug:'mikolaj-nadulski', name:'Mikołaj Nadulski', club:'fc-sikorz', number:20, age:15, position:'Zawodnik z pola'},
+  {slug:'oliwier-rakowski', name:'Oliwier Rakowski', club:'fc-sikorz', number:47, age:17, position:'Zawodnik z pola'},
+  {slug:'hubert-siematkowski', name:'Hubert Siemiatkowski', club:'fc-sikorz', number:77, age:16, position:'Zawodnik z pola'},
+
+  /* FC Marcelki */
+  {slug:'tomasz-kruczynski', name:'Tomasz Kruczyński', club:'fc-marcelki', number:1, age:16, position:'Zawodnik z pola', captain:true},
+  {slug:'mateusz-pekowski', name:'Mateusz Pekowski', club:'fc-marcelki', number:2, age:16, position:'Zawodnik z pola'},
+  {slug:'wiktor-bruzda', name:'Wiktor Bruzda', club:'fc-marcelki', number:3, age:16, position:'Zawodnik z pola'},
+  {slug:'tymoteusz-pawlowski', name:'Tymoteusz Pawłowski', club:'fc-marcelki', number:4, age:14, position:'Bramkarz'},
+  {slug:'adam-kutkowski', name:'Adam Kutkowski', club:'fc-marcelki', number:5, age:16, position:'Zawodnik z pola'},
+  {slug:'wojciech-adamczyk', name:'Wojciech Adamczyk', club:'fc-marcelki', number:6, age:15, position:'Zawodnik z pola'},
+  {slug:'jedrzej-marcinkowski', name:'Jędrzej Marcinkowski', club:'fc-marcelki', number:7, age:16, position:'Bramkarz'},
+  {slug:'kacper-lugiewicz', name:'Kacper Ługiewicz', club:'fc-marcelki', number:8, age:16, position:'Zawodnik z pola'},
+  {slug:'wojciech-rybka', name:'Wojciech Rybka', club:'fc-marcelki', number:9, age:15, position:'Zawodnik z pola'},
+  {slug:'iwo-filipiak', name:'Iwo Filipiak', club:'fc-marcelki', number:10, age:16, position:'Zawodnik z pola'},
+  {slug:'michal-lewandowski', name:'Michał Lewandowski', club:'fc-marcelki', number:11, age:14, position:'Zawodnik z pola'},
+  {slug:'filip-dabkowski', name:'Filip Dąbkowski', club:'fc-marcelki', number:12, age:15, position:'Zawodnik z pola'},
+  {slug:'bartosz-jaworski', name:'Bartosz Jaworski', club:'fc-marcelki', number:13, age:16, position:'Zawodnik z pola'},
+  {slug:'damian-kustra', name:'Damian Kustra', club:'fc-marcelki', number:14, age:16, position:'Zawodnik z pola'},
+
+  /* Spucha Gołębie */
+  {slug:'jan-kusinski', name:'Jan Kusiński', club:'spucha-golebie', number:1, age:15, position:'Zawodnik z pola'},
+  {slug:'hubert-zuchowski', name:'Hubert Żuchowski', club:'spucha-golebie', number:2, age:15, position:'Zawodnik z pola', captain:true},
+  {slug:'igor-chalinski', name:'Igor Chaliński', club:'spucha-golebie', number:3, age:15, position:'Zawodnik z pola'},
+  {slug:'oliwier-sowinski', name:'Oliwier Sowiński', club:'spucha-golebie', number:4, age:17, position:'Zawodnik z pola'},
+  {slug:'michal-witkowski-spucha-golebie', name:'Michał Witkowski', club:'spucha-golebie', number:5, age:15, position:'Zawodnik z pola'},
+  {slug:'franciszek-jablonski', name:'Franciszek Jabłoński', club:'spucha-golebie', number:6, age:15, position:'Zawodnik z pola'},
+  {slug:'mikolaj-stanicki', name:'Mikołaj Stanicki', club:'spucha-golebie', number:7, age:16, position:'Zawodnik z pola'},
+  {slug:'aleksander-poplawski', name:'Aleksander Popławski', club:'spucha-golebie', number:8, age:14, position:'Zawodnik z pola'},
+  {slug:'filip-grela', name:'Filip Grela', club:'spucha-golebie', number:9, age:14, position:'Zawodnik z pola'},
+  {slug:'maciej-olkowiak', name:'Maciej Olkowiak', club:'spucha-golebie', number:10, age:18, position:'Zawodnik z pola'},
+  {slug:'damian-gorecki', name:'Damian Górecki', club:'spucha-golebie', number:11, age:14, position:'Bramkarz'},
+  {slug:'oliwier-krebel', name:'Oliwier Krebel', club:'spucha-golebie', number:12, age:15, position:'Zawodnik z pola'},
+
+  /* Cytryna Team */
+  {slug:'karol-zakrzewski', name:'Karol Zakrzewski', club:'cytryna-team', number:1, age:17, position:'Zawodnik z pola', captain:true},
+  {slug:'marcel-kaszuba', name:'Marcel Kaszuba', club:'cytryna-team', number:2, age:17, position:'Zawodnik z pola'},
+  {slug:'jakub-nowatkowski', name:'Jakub Nowatkowski', club:'cytryna-team', number:3, age:18, position:'Zawodnik z pola'},
+  {slug:'nikodem-gralak', name:'Nikodem Gralak', club:'cytryna-team', number:4, age:17, position:'Zawodnik z pola'},
+  {slug:'dariusz-debicki', name:'Dariusz Dębicki', club:'cytryna-team', number:5, age:18, position:'Zawodnik z pola'},
+  {slug:'nikodem-dabrowski', name:'Nikodem Dąbrowski', club:'cytryna-team', number:6, age:17, position:'Zawodnik z pola'},
+  {slug:'igor-paczkowski', name:'Igor Paczkowski', club:'cytryna-team', number:7, age:15, position:'Zawodnik z pola'},
+  {slug:'igor-saletra', name:'Igor Saletra', club:'cytryna-team', number:8, age:18, position:'Bramkarz'},
+  {slug:'alan-wisniewski', name:'Alan Wiśniewski', club:'cytryna-team', number:9, age:15, position:'Zawodnik z pola'},
+  {slug:'michal-kuskowski', name:'Michał Kuskowski', club:'cytryna-team', number:10, age:21, position:'Zawodnik z pola'},
+  {slug:'szymon-czajkowski', name:'Szymon Czajkowski', club:'cytryna-team', number:11, age:16, position:'Zawodnik z pola'},
+  {slug:'milosz-gruszczynski', name:'Miłosz Gruszczyński', club:'cytryna-team', number:12, age:19, position:'Zawodnik z pola'},
+  {slug:'filip-zaporowicz', name:'Filip Zaporowicz', club:'cytryna-team', number:13, age:16, position:'Zawodnik z pola'},
+  {slug:'damian-jedrzejewski', name:'Damian Jędrzejewski', club:'cytryna-team', number:14, age:17, position:'Zawodnik z pola'},
+  {slug:'milosz-filipiak', name:'Miłosz Filipiak', club:'cytryna-team', number:15, age:16, position:'Zawodnik z pola'},
+  {slug:'korneliusz-dudkiewicz', name:'Korneliusz Dudkiewicz', club:'cytryna-team', number:16, age:16, position:'Zawodnik z pola'},
+  {slug:'julian-kaczmarzyk', name:'Julian Kaczmarzyk', club:'cytryna-team', number:17, age:18, position:'Zawodnik z pola'},
+
+  /* WKS Harnaś Wojnowo */
+  {slug:'maciej-werner', name:'Maciej Werner', club:'wks-harnas-wojnowo', number:5, age:17, position:'Zawodnik z pola'},
+  {slug:'kajetan-blokowski', name:'Kajetan Blokowski', club:'wks-harnas-wojnowo', number:6, age:16, position:'Zawodnik z pola'},
+  {slug:'jakub-buczkowski', name:'Jakub Buczkowski', club:'wks-harnas-wojnowo', number:7, age:20, position:'Zawodnik z pola'},
+  {slug:'blazej-babyszko', name:'Błażej Babyszko', club:'wks-harnas-wojnowo', number:8, age:15, position:'Zawodnik z pola'},
+  {slug:'szymon-wroblewski', name:'Szymon Wróblewski', club:'wks-harnas-wojnowo', number:10, age:16, position:'Zawodnik z pola'},
+  {slug:'jan-predynkiewicz', name:'Jan Predynkiewicz', club:'wks-harnas-wojnowo', number:13, age:17, position:'Zawodnik z pola'},
+  {slug:'szymon-dejewski', name:'Szymon Dejewski', club:'wks-harnas-wojnowo', number:15, age:17, position:'Zawodnik z pola', captain:true},
+  {slug:'mateusz-mlodziankiewicz', name:'Mateusz Młodziankiewicz', club:'wks-harnas-wojnowo', number:20, age:18, position:'Zawodnik z pola'},
+  {slug:'filip-marcinkowski', name:'Filip Marcinkowski', club:'wks-harnas-wojnowo', number:21, age:15, position:'Zawodnik z pola'},
+  {slug:'damian-felton', name:'Damian Felton', club:'wks-harnas-wojnowo', number:22, age:16, position:'Zawodnik z pola'},
+  {slug:'igor-zadruzynski', name:'Igor Zadrużyński', club:'wks-harnas-wojnowo', number:23, age:17, position:'Zawodnik z pola'},
+  {slug:'michal-wegrecki', name:'Michał Węgrecki', club:'wks-harnas-wojnowo', number:28, age:15, position:'Zawodnik z pola'},
+  {slug:'gabriel-zawieracz', name:'Gabriel Zawieracz', club:'wks-harnas-wojnowo', number:67, age:15, position:'Zawodnik z pola'},
+  {slug:'filip-chlopecki', name:'Filip Chłopecki', club:'wks-harnas-wojnowo', number:69, age:14, position:'Bramkarz'},
+  {slug:'michal-werner', name:'Michał Werner', club:'wks-harnas-wojnowo', number:77, age:16, position:'Zawodnik z pola'},
+  {slug:'wiktor-czajkowski', name:'Wiktor Czajkowski', club:'wks-harnas-wojnowo', number:99, age:16, position:'Zawodnik z pola'},
+
+  /* FC Świstak */
+  {slug:'sebastian-bartoszynski', name:'Sebastian Bartoszyński', club:'fc-swistak', number:1, age:16, position:'Zawodnik z pola', captain:true},
+  {slug:'olaf-grabowski', name:'Olaf Grabowski', club:'fc-swistak', number:2, age:16, position:'Zawodnik z pola'},
+  {slug:'dominik-topolewski', name:'Dominik Topolewski', club:'fc-swistak', number:3, age:15, position:'Zawodnik z pola'},
+  {slug:'maciej-czajkowski', name:'Maciej Czajkowski', club:'fc-swistak', number:4, age:15, position:'Zawodnik z pola'},
+  {slug:'szymon-paczkowski', name:'Szymon Paczkowski', club:'fc-swistak', number:5, age:15, position:'Zawodnik z pola'},
+  {slug:'franciszek-wisniewski', name:'Franciszek Wiśniewski', club:'fc-swistak', number:6, age:14, position:'Zawodnik z pola'},
+  {slug:'igor-bachorczyk', name:'Igor Bachorczyk', club:'fc-swistak', number:7, age:15, position:'Zawodnik z pola'},
+  {slug:'szymon-bachorczyk', name:'Szymon Bachorczyk', club:'fc-swistak', number:8, age:17, position:'Zawodnik z pola'},
+  {slug:'oskar-dzadzewski', name:'Oskar Dżadżewski', club:'fc-swistak', number:9, age:16, position:'Bramkarz'},
+
+  /* WKS Płonne */
+  {slug:'mateusz-niburski', name:'Mateusz Niburski', club:'wks-plonne', number:1, age:17, position:'Bramkarz'},
+  {slug:'nikodem-jerzy-stasiak', name:'Nikodem Jerzy Stasiak', club:'wks-plonne', number:2, age:20, position:'Zawodnik z pola'},
+  {slug:'michal-bulkowski', name:'Michał Bułkowski', club:'wks-plonne', number:3, age:20, position:'Zawodnik z pola'},
+  {slug:'kornel-laskowski', name:'Kornel Laskowski', club:'wks-plonne', number:4, age:17, position:'Zawodnik z pola'},
+  {slug:'antoni-suwala', name:'Antoni Suwała', club:'wks-plonne', number:5, age:18, position:'Zawodnik z pola'},
+  {slug:'aleksander-muchewicz', name:'Aleksander Muchewicz', club:'wks-plonne', number:6, age:15, position:'Zawodnik z pola'},
+  {slug:'mateusz-bulkowski', name:'Mateusz Bułkowski', club:'wks-plonne', number:7, age:21, position:'Zawodnik z pola'},
+  {slug:'szymon-sobieszynski', name:'Szymon Sobieszynski', club:'wks-plonne', number:9, age:19, position:'Zawodnik z pola'},
+  {slug:'lukasz-piotrowski', name:'Łukasz Piotrowski', club:'wks-plonne', number:10, age:19, position:'Zawodnik z pola', captain:true},
+  {slug:'adam-jeka', name:'Adam Jeka', club:'wks-plonne', number:11, age:23, position:'Zawodnik z pola'},
+  {slug:'jakub-rykaczewski', name:'Jakub Rykaczewski', club:'wks-plonne', number:16, age:19, position:'Zawodnik z pola'},
+  {slug:'jakub-zakrzewski', name:'Jakub Zakrzewski', club:'wks-plonne', number:19, age:15, position:'Zawodnik z pola'},
+  {slug:'michal-pietrzak', name:'Michał Pietrzak', club:'wks-plonne', number:21, age:19, position:'Zawodnik z pola'},
+  {slug:'jakub-lewicki', name:'Jakub Lewicki', club:'wks-plonne', number:22, age:16, position:'Zawodnik z pola'},
+  {slug:'joachim-suwala', name:'Joachim Suwała', club:'wks-plonne', number:23, age:19, position:'Zawodnik z pola'},
+  {slug:'igor-pierzgalski', name:'Igor Pierzgalski', club:'wks-plonne', number:29, age:17, position:'Zawodnik z pola'},
+  {slug:'mateusz-piwonski', name:'Mateusz Piwoński', club:'wks-plonne', number:67, age:16, position:'Zawodnik z pola'},
+  {slug:'kamil-krigier', name:'Kamil Krigier', club:'wks-plonne', number:99, age:20, position:'Zawodnik z pola'},
+
+  /* Unia Wikingi Radomin */
+  {slug:'kacper-szyszkowski', name:'Kacper Szyszkowski', club:'unia-wikingi-radomin', number:1, age:16, position:'Zawodnik z pola', captain:true},
+  {slug:'oliwier-bienkowski', name:'Oliwier Bieńkowski', club:'unia-wikingi-radomin', number:2, age:16, position:'Bramkarz'},
+  {slug:'karol-szyszkowski', name:'Karol Szyszkowski', club:'unia-wikingi-radomin', number:3, age:18, position:'Zawodnik z pola'},
+  {slug:'oskar-blaszkiewicz', name:'Oskar Błaszkiewicz', club:'unia-wikingi-radomin', number:4, age:18, position:'Zawodnik z pola'},
+  {slug:'jakub-litke', name:'Jakub Litke', club:'unia-wikingi-radomin', number:5, age:16, position:'Zawodnik z pola'},
+  {slug:'mikolaj-szulc', name:'Mikołaj Szulc', club:'unia-wikingi-radomin', number:6, age:19, position:'Zawodnik z pola'},
+  {slug:'oskar-jurgielski', name:'Oskar Jurgielski', club:'unia-wikingi-radomin', number:7, age:14, position:'Zawodnik z pola'},
+  {slug:'patryk-petlicki', name:'Patryk Pętlicki', club:'unia-wikingi-radomin', number:8, age:18, position:'Zawodnik z pola'},
+  {slug:'marcel-sztandarski', name:'Marcel Sztandarski', club:'unia-wikingi-radomin', number:9, age:15, position:'Zawodnik z pola'},
+  {slug:'maksymilian-cieszynski', name:'Maksymilian Cieszyński', club:'unia-wikingi-radomin', number:10, age:16, position:'Zawodnik z pola'},
+  {slug:'marcel-wroblewski', name:'Marcel Wróblewski', club:'unia-wikingi-radomin', number:11, age:17, position:'Zawodnik z pola'},
+  {slug:'bartosz-zuchowski', name:'Bartosz Żuchowski', club:'unia-wikingi-radomin', number:12, age:15, position:'Zawodnik z pola'},
+  {slug:'aleksander-haranicz', name:'Aleksander Haranicz', club:'unia-wikingi-radomin', number:13, age:15, position:'Zawodnik z pola'},
+  {slug:'wiktor-saja', name:'Wiktor Saja', club:'unia-wikingi-radomin', number:14, age:15, position:'Zawodnik z pola'},
+];
+
+/* SCHEDULE: per league, array of rounds. Each round has matches + a bye team. */
+const SCHEDULE = {
+  1:[
+    { round:1, dateRange:'15 sierpnia – 21 sierpnia 2026', bye:'betonboys', matches:[
+      {home:'iskra-dulsk', away:'wks-plonne', venue:'Orlik w Dulsku'},
+      {home:'spucha-golebie', away:'wks-herbatniki', venue:'Orlik w Golubiu-Dobrzyniu'},
+      {home:'unia-wikingi-radomin', away:'wks-harnas-wojnowo', venue:'Orlik w Golubiu-Dobrzyniu'},
+    ]},
+    { round:2, dateRange:'22 sierpnia – 28 sierpnia 2026', bye:'wks-herbatniki', matches:[
+      {home:'betonboys', away:'wks-plonne', venue:'Orlik w Golubiu-Dobrzyniu'},
+      {home:'wks-harnas-wojnowo', away:'iskra-dulsk', venue:'Orlik w Zbójnie'},
+      {home:'spucha-golebie', away:'unia-wikingi-radomin', venue:'Orlik w Golubiu-Dobrzyniu'},
+    ]},
+    { round:3, dateRange:'29 sierpnia – 4 września 2026', bye:'unia-wikingi-radomin', matches:[
+      {home:'betonboys', away:'wks-herbatniki', venue:'Orlik w Golubiu-Dobrzyniu'},
+      {home:'wks-harnas-wojnowo', away:'wks-plonne', venue:'Orlik w Radominie'},
+      {home:'iskra-dulsk', away:'spucha-golebie', venue:'Orlik w Dulsku'},
+    ]},
+    { round:4, dateRange:'5 września – 11 września 2026', bye:'iskra-dulsk', matches:[
+      {home:'wks-harnas-wojnowo', away:'betonboys', venue:'Orlik w Zbójnie'},
+      {home:'wks-herbatniki', away:'unia-wikingi-radomin', venue:'Orlik w Golubiu-Dobrzyniu'},
+      {home:'wks-plonne', away:'spucha-golebie', venue:'Orlik w Radominie'},
+    ]},
+    { round:5, dateRange:'19 września – 25 września 2026', bye:'wks-plonne', matches:[
+      {home:'betonboys', away:'unia-wikingi-radomin', venue:'Orlik w Radominie'},
+      {home:'spucha-golebie', away:'wks-harnas-wojnowo', venue:'Orlik w Golubiu-Dobrzyniu'},
+      {home:'wks-herbatniki', away:'iskra-dulsk', venue:'Orlik w Golubiu-Dobrzyniu'},
+    ]},
+    { round:6, dateRange:'26 września – 2 października 2026', bye:'wks-harnas-wojnowo', matches:[
+      {home:'betonboys', away:'spucha-golebie', venue:'Orlik w Golubiu-Dobrzyniu'},
+      {home:'unia-wikingi-radomin', away:'iskra-dulsk', venue:'Orlik w Radominie'},
+      {home:'wks-plonne', away:'wks-herbatniki', venue:'Orlik w Radominie'},
+    ]},
+    { round:7, dateRange:'3 października – 9 października 2026', bye:'spucha-golebie', matches:[
+      {home:'iskra-dulsk', away:'betonboys', venue:'Orlik w Dulsku'},
+      {home:'unia-wikingi-radomin', away:'wks-plonne', venue:'Orlik w Radominie'},
+      {home:'wks-herbatniki', away:'wks-harnas-wojnowo', venue:'Orlik w Golubiu-Dobrzyniu'},
+    ]},
+  ],
+  2:[
+    { round:1, dateRange:'15 sierpnia – 21 sierpnia 2026', bye:'cytryna-team', matches:[
+      {home:'fc-marcelki', away:'ks-szczupaki', venue:'Orlik w Golubiu-Dobrzyniu'},
+      {home:'fc-sikorz', away:'ks-rycerze', venue:'Orlik w Zbójnie'},
+      {home:'fc-swistak', away:'ks-mlyn-kielbzak', venue:'Orlik w Zbójnie'},
+    ]},
+    { round:2, dateRange:'22 sierpnia – 28 sierpnia 2026', bye:'ks-rycerze', matches:[
+      {home:'cytryna-team', away:'ks-szczupaki', venue:'Orlik w Golubiu-Dobrzyniu'},
+      {home:'fc-marcelki', away:'ks-mlyn-kielbzak', venue:'Orlik w Golubiu-Dobrzyniu'},
+      {home:'fc-sikorz', away:'fc-swistak', venue:'Orlik w Zbójnie'},
+    ]},
+    { round:3, dateRange:'29 sierpnia – 4 września 2026', bye:'fc-swistak', matches:[
+      {home:'cytryna-team', away:'ks-rycerze', venue:'Orlik w Golubiu-Dobrzyniu'},
+      {home:'ks-szczupaki', away:'ks-mlyn-kielbzak', venue:'Orlik w Zbójnie'},
+      {home:'fc-marcelki', away:'fc-sikorz', venue:'Orlik w Golubiu-Dobrzyniu'},
+    ]},
+    { round:4, dateRange:'5 września – 11 września 2026', bye:'fc-marcelki', matches:[
+      {home:'cytryna-team', away:'ks-mlyn-kielbzak', venue:'Orlik w Zbójnie'},
+      {home:'ks-rycerze', away:'fc-swistak', venue:'Orlik w Golubiu-Dobrzyniu'},
+      {home:'ks-szczupaki', away:'fc-sikorz', venue:'Orlik w Zbójnie'},
+    ]},
+    { round:5, dateRange:'19 września – 25 września 2026', bye:'ks-szczupaki', matches:[
+      {home:'cytryna-team', away:'fc-swistak', venue:'Orlik w Golubiu-Dobrzyniu'},
+      {home:'ks-mlyn-kielbzak', away:'fc-sikorz', venue:'Orlik w Zbójnie'},
+      {home:'ks-rycerze', away:'fc-marcelki', venue:'Orlik w Golubiu-Dobrzyniu'},
+    ]},
+    { round:6, dateRange:'26 września – 2 października 2026', bye:'ks-mlyn-kielbzak', matches:[
+      {home:'cytryna-team', away:'fc-sikorz', venue:'Orlik w Zbójnie'},
+      {home:'fc-swistak', away:'fc-marcelki', venue:'Orlik w Golubiu-Dobrzyniu'},
+      {home:'ks-rycerze', away:'ks-szczupaki', venue:'Orlik w Golubiu-Dobrzyniu'},
+    ]},
+    { round:7, dateRange:'3 października – 9 października 2026', bye:'fc-sikorz', matches:[
+      {home:'cytryna-team', away:'fc-marcelki', venue:'Orlik w Golubiu-Dobrzyniu'},
+      {home:'fc-swistak', away:'ks-szczupaki', venue:'Orlik w Golubiu-Dobrzyniu'},
+      {home:'ks-mlyn-kielbzak', away:'ks-rycerze', venue:'Orlik w Golubiu-Dobrzyniu'},
+    ]},
+  ],
+};
+
+function matchId(league, round, home, away){ return `l${league}-r${round}-${home}-${away}`; }
+function allMatches(){
+  const list = [];
+  [1,2].forEach(league=>{
+    (SCHEDULE[league]||[]).forEach(rnd=>{
+      rnd.matches.forEach(m=>{
+        list.push({...m, league, round:rnd.round, dateRange:rnd.dateRange, id:matchId(league,rnd.round,m.home,m.away)});
+      });
+    });
+  });
+  return list;
+}
+function matchById(id){ return allMatches().find(m=>m.id===id); }
+
+const initials = n => n.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
+
+/* ================= HELPERS ================= */
+function clubBySlug(s){return CLUBS.find(c=>c.slug===s);}
+function clubsOfLeague(num){return CLUBS.filter(c=>c.league===num);}
+function playersOfClub(s){return PLAYERS.filter(p=>p.club===s);}
+function crestEl(club, size){
+  const cls = size==='sm'?'':'-lg';
+  if(club.logo){ return `<img src="${club.logo}" alt="${club.name}">`; }
+  return `<div class="badge-fallback${cls==='-lg'?'-lg':''}">${initials(club.name)}</div>`;
+}
+
+function standingsTable(clubs, emptyLeagueLabel, leagueNum){
+  if(!clubs.length){
+    return `<div class="table-wrap"><div class="empty-state">
+      <span class="mark">Tabela</span>
+      <h3>Skład ${emptyLeagueLabel} zostanie ogłoszony wkrótce</h3>
+      <p>Wróć tutaj po rozpoczęciu sezonu — tabela wypełni się automatycznie wynikami.</p>
+    </div></div>`;
+  }
+  const rows = clubs.map((c,i)=>{
+    let badge = '';
+    if(leagueNum===1 && i===0) badge = '<span class="pos-badge champ">Mistrz Ziemi Dobrzyńskiej</span>';
+    else if(leagueNum===1 && i===clubs.length-1) badge = '<span class="pos-badge relegate">Spadek</span>';
+    else if(leagueNum===2 && i<2) badge = '<span class="pos-badge promote">Awans</span>';
+    return `
+    <tr>
+      <td class="pos">${i+1}</td>
+      <td class="team" onclick="location.hash='#klub/${c.slug}'">
+        ${c.logo?`<img src="${c.logo}" alt="">`:`<div class="badge-fallback">${initials(c.name)}</div>`}
+        ${c.name}${badge}
+      </td>
+      <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+      <td class="pts">0</td>
+    </tr>`;
+  }).join('');
+  const legend = leagueNum===1
+    ? `<div class="table-legend"><span><i class="dot champ"></i>Mistrz Ziemi Dobrzyńskiej</span><span><i class="dot relegate"></i>Spadek do 2. Ligi</span></div>`
+    : leagueNum===2
+    ? `<div class="table-legend"><span><i class="dot promote"></i>Awans do 1. Ligi</span></div>`
+    : '';
+  return `<div class="table-wrap"><table class="standings">
+    <thead><tr>
+      <th>Poz.</th><th>Klub</th><th>M</th><th>Z</th><th>R</th><th>P</th><th>+</th><th>-</th><th>+/-</th><th>Pkt</th>
+    </tr></thead>
+    <tbody>${rows}</tbody>
+  </table></div>${legend}`;
+}
+
+/* ---- Sortable roster table ---- */
+const ROSTER_COLUMNS = [
+  {key:'number', label:'#'},
+  {key:'name', label:'Zawodnik', sortable:false},
+  {key:'position', label:'Pozycja'},
+  {key:'age', label:'Wiek'},
+  {key:'matches', label:'M'},
+  {key:'goals', label:'Br.'},
+  {key:'assists', label:'As.'},
+  {key:'yellow', label:'ŻK'},
+  {key:'red', label:'CK'},
+  {key:'potm', label:'POTM'},
+  {key:'mvpRound', label:'MVP Kolejki'},
+  {key:'six', label:'"6" Kolejki'},
+];
+const ROSTER_STATE = {};
+const ROSTER_LISTS = {};
+
+function normPlayer(p){
+  return {...p, matches:p.matches||0, goals:p.goals||0, assists:p.assists||0,
+    yellow:p.yellow||0, red:p.red||0, potm:p.potm||0, mvpRound:p.mvpRound||0, six:p.six||0};
+}
+
+function sortRoster(tableId){
+  const list = ROSTER_LISTS[tableId] || [];
+  const {key, dir} = ROSTER_STATE[tableId] || {key:'number', dir:'asc'};
+  const mult = dir==='asc' ? 1 : -1;
+  return [...list].sort((a,b)=>{
+    const va=a[key], vb=b[key];
+    if(typeof va==='string' || typeof vb==='string'){
+      return mult * String(va||'').localeCompare(String(vb||''),'pl');
+    }
+    return mult * ((va??0) - (vb??0));
+  });
+}
+
+function rosterRowHtml(p){
+  return `<tr>
+    <td>${p.number ?? '-'}</td>
+    <td class="player" onclick="location.hash='#zawodnik/${p.slug}'">
+      <div class="avatar-sm">${initials(p.name)}</div>${p.name}${p.captain?' <span class="cap-tag">C</span>':''}
+    </td>
+    <td>${p.position}</td>
+    <td>${p.age ?? '-'}</td>
+    <td>${p.matches}</td><td>${p.goals}</td><td>${p.assists}</td><td>${p.yellow}</td><td>${p.red}</td>
+    <td>${p.potm}</td><td>${p.mvpRound}</td><td>${p.six}</td>
+  </tr>`;
+}
+
+function rosterHeadHtml(tableId){
+  const state = ROSTER_STATE[tableId] || {key:'number', dir:'asc'};
+  return ROSTER_COLUMNS.map(c=>{
+    if(c.sortable===false){
+      return `<th>${c.label}</th>`;
+    }
+    const active = state.key===c.key;
+    const arrow = active ? `<span class="arrow">${state.dir==='asc'?'▲':'▼'}</span>` : '';
+    return `<th class="sortable${active?' active':''}" data-key="${c.key}" data-table="${tableId}">${c.label}${arrow}</th>`;
+  }).join('');
+}
+
+function rosterTable(clubSlug){
+  const raw = playersOfClub(clubSlug);
+  if(!raw.length){
+    return `<div class="table-wrap"><div class="empty-state">
+      <span class="mark">Skład</span>
+      <h3>Kadra zespołu jest uzupełniana</h3>
+      <p>Lista zawodników pojawi się tutaj wkrótce.</p>
+    </div></div>`;
+  }
+  const tableId = 'roster-'+clubSlug;
+  ROSTER_LISTS[tableId] = raw.map(normPlayer);
+  if(!ROSTER_STATE[tableId]) ROSTER_STATE[tableId] = {key:'number', dir:'asc'};
+  const sorted = sortRoster(tableId);
+  return `<div class="table-wrap"><table class="roster" data-table-id="${tableId}">
+    <thead><tr>${rosterHeadHtml(tableId)}</tr></thead>
+    <tbody>${sorted.map(rosterRowHtml).join('')}</tbody>
+  </table></div>`;
+}
+
+document.addEventListener('click', function(e){
+  const th = e.target.closest('th.sortable');
+  if(!th) return;
+  const tableId = th.dataset.table, key = th.dataset.key;
+  if(!ROSTER_LISTS[tableId]) return;
+  const state = ROSTER_STATE[tableId] || {key:'number', dir:'asc'};
+  if(state.key===key){ state.dir = state.dir==='asc' ? 'desc' : 'asc'; }
+  else { state.key = key; state.dir = 'asc'; }
+  ROSTER_STATE[tableId] = state;
+  const tableEl = document.querySelector(`table[data-table-id="${tableId}"]`);
+  if(!tableEl) return;
+  const sorted = sortRoster(tableId);
+  tableEl.querySelector('thead tr').innerHTML = rosterHeadHtml(tableId);
+  tableEl.querySelector('tbody').innerHTML = sorted.map(rosterRowHtml).join('');
+});
+
+function emptyPanel(mark,title,text){
+  return `<div class="table-wrap"><div class="empty-state">
+    <span class="mark">${mark}</span><h3>${title}</h3><p>${text}</p>
+  </div></div>`;
+}
+
+function fixturesList(leagueNum, clubFilterSlug){
+  const rounds = SCHEDULE[leagueNum] || [];
+  if(!rounds.length){
+    return emptyPanel('Terminarz','Brak zaplanowanych meczów','Terminarz spotkań pojawi się tutaj po ustaleniu harmonogramu.');
+  }
+  const blocks = rounds.map(rnd=>{
+    let matches = rnd.matches;
+    const showBye = !clubFilterSlug || clubFilterSlug===rnd.bye;
+    if(clubFilterSlug){ matches = matches.filter(m=>m.home===clubFilterSlug || m.away===clubFilterSlug); }
+    const byeClub = clubBySlug(rnd.bye);
+    const rows = matches.map(m=>{
+      const h = clubBySlug(m.home), a = clubBySlug(m.away);
+      const id = matchId(leagueNum, rnd.round, m.home, m.away);
+      return `
+      <div class="fixture-row" onclick="location.hash='#mecz/${id}'">
+        <div class="fixture-team home">${h.name}${crestTiny(h)}</div>
+        <div class="fixture-mid"><span class="vs">VS</span><span class="venue">${m.venue}</span></div>
+        <div class="fixture-team away">${crestTiny(a)}${a.name}</div>
+      </div>`;
+    }).join('');
+    const byeRow = (showBye && byeClub) ? `
+      <div class="fixture-row bye">
+        <div class="fixture-team home">${byeClub.name}${crestTiny(byeClub)}</div>
+        <div class="fixture-mid"><span class="vs">Pauza</span><span class="venue">Wolna kolejka</span></div>
+        <div class="fixture-team away"></div>
+      </div>` : '';
+    if(!rows && !byeRow) return '';
+    return `<div class="fixtures-wrap" style="margin-bottom:20px;"><div class="fixtures-head">Kolejka ${rnd.round} · ${rnd.dateRange}</div>${rows}${byeRow}</div>`;
+  }).join('');
+  return blocks || emptyPanel('Terminarz','Brak zaplanowanych meczów','Terminarz spotkań pojawi się tutaj po ustaleniu harmonogramu.');
+}
+function crestTiny(club){
+  return club.logo ? `<img src="${club.logo}" alt="${club.name}">` : `<div class="badge-fallback">${initials(club.name)}</div>`;
+}
+
+/* ================= PAGES ================= */
+function pageHome(){
+  return `
+  <section class="hero">
+    <img class="wing" src="images/logo-eagle.png" alt="">
+    <div class="wrap">
+      <span class="eyebrow">Sezon Jesień 2026</span>
+      <h1>Orlikowa Liga<em>Ziemi Dobrzyńskiej</em></h1>
+      <p class="lead">Amatorska liga piłkarska rozgrywana na obiektach Orlik. Dwie klasy rozgrywkowe, lokalne drużyny i prawdziwa rywalizacja na boisku.</p>
+      <div class="cta-row">
+        <a href="#liga/1" class="btn primary">Zobacz 1. Ligę</a>
+        <a href="#liga/2" class="btn primary">Zobacz 2. Ligę</a>
+        <a href="#zespoly" class="btn ghost">Zespoły i statystyki</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div><span class="tag">Skrót</span><h2>Co znajdziesz na stronie</h2></div>
+        <p>Wszystko o rozgrywkach OLZD w jednym miejscu — tabele, kadry, terminarz i zasady gry.</p>
+      </div>
+      <div class="quick-grid" id="quickGrid">
+        <a class="quick-card" href="#liga/1"><span class="num">01</span><h3>1. Liga</h3><p>Tabela rozgrywek najwyższej klasy ligowej OLZD, sezon Jesień 2026.</p></a>
+        <a class="quick-card" href="#liga/2"><span class="num">02</span><h3>2. Liga</h3><p>Tabela rozgrywek drugiej klasy ligowej OLZD, sezon Jesień 2026.</p></a>
+        <a class="quick-card" href="#zespoly"><span class="num">03</span><h3>Zespoły i statystyki</h3><p>Wszystkie kluby ligi, ich kadry oraz statystyki zawodników.</p></a>
+        <a class="quick-card" href="#terminarz"><span class="num">04</span><h3>Terminarz</h3><p>Harmonogram kolejek i najbliższych meczów rozgrywek.</p></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="wrap">
+      <div class="section-head">
+        <div><span class="tag">1. Liga</span><h2>Aktualna tabela</h2></div>
+        <p>Tabela zostanie uzupełniona po rozegraniu pierwszych kolejek sezonu.</p>
+      </div>
+      ${standingsTable(clubsOfLeague(1),'1. Ligi', 1)}
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="wrap">
+      <div class="section-head">
+        <div><span class="tag">2. Liga</span><h2>Aktualna tabela</h2></div>
+        <p>Tabela zostanie uzupełniona po rozegraniu pierwszych kolejek sezonu.</p>
+      </div>
+      ${standingsTable(clubsOfLeague(2),'2. Ligi', 2)}
+    </div>
+  </section>`;
+}
+
+function pageLeague(num){
+  const n = Number(num);
+  const clubs = clubsOfLeague(n);
+  return `
+  <section class="section">
+    <div class="wrap">
+      <div class="crumbs"><a href="#home">Start</a> / ${n}. Liga</div>
+      <div class="section-head" style="margin-top:18px;">
+        <div><span class="tag">Rozgrywki</span><h2>${n}. Liga — Jesień 2026</h2></div>
+        <p>${n===1 ? 'Klasa najwyższa Orlikowej Ligi Ziemi Dobrzyńskiej.' : 'Druga klasa rozgrywkowa Orlikowej Ligi Ziemi Dobrzyńskiej.'}</p>
+      </div>
+      ${standingsTable(clubs, n+'. Ligi', n)}
+      <div style="margin-top:34px;">
+        <div class="section-head"><div><span class="tag">Terminarz</span><h2>Kolejki</h2></div></div>
+        ${fixturesList(n)}
+      </div>
+    </div>
+  </section>`;
+}
+
+function pageTeams(){
+  const group = (num,label) => `
+    <div class="section-head" style="margin-top:${num===1?0:38}px;">
+      <div><span class="tag">${label}</span><h2>${num}. Liga</h2></div>
+    </div>
+    <div class="teams-grid">
+      ${clubsOfLeague(num).map(c=>`
+        <a class="team-card" href="#klub/${c.slug}">
+          <div class="crest">${c.logo?`<img src="${c.logo}" alt="${c.name}">`:`<div class="badge-fallback-lg">${initials(c.name)}</div>`}</div>
+          <h4>${c.name}</h4>
+        </a>`).join('')}
+    </div>`;
+  return `
+  <section class="section">
+    <div class="wrap">
+      <div class="crumbs"><a href="#home">Start</a> / Zespoły i statystyki</div>
+      <div class="section-head" style="margin-top:18px;">
+        <div><span class="tag">Kluby</span><h2>Zespoły i statystyki</h2></div>
+        <p>Kliknij w klub, aby zobaczyć kadrę, statystyki i wyniki drużyny.</p>
+      </div>
+      ${group(1,'Klasa 1')}
+      ${group(2,'Klasa 2')}
+    </div>
+  </section>`;
+}
+
+function pageClub(slug){
+  const club = clubBySlug(slug);
+  if(!club) return page404();
+  const tabs = [
+    ['ogolne','Ogólne'],
+    ['wyniki','Ostatnie wyniki'],
+    ['tabela','Tabela'],
+    ['terminarz','Terminarz'],
+  ];
+  return `
+  <section class="wrap"><div class="crumbs"><a href="#home">Start</a> / <a href="#zespoly">Zespoły</a> / ${club.name}</div></section>
+  <section class="club-hero wrap">
+    <div class="crest-lg">${club.logo?`<img src="${club.logo}" alt="${club.name}">`:`<div class="badge-fallback-xl">${initials(club.name)}</div>`}</div>
+    <div class="info">
+      <span class="eyebrow">Klub OLZD</span>
+      <h1>${club.name}</h1>
+    </div>
+  </section>
+  <section class="section tight">
+    <div class="wrap">
+      <div class="tabs" id="clubTabs">
+        ${tabs.map((t,i)=>`<button data-tab="${t[0]}" class="${i===0?'active':''}">${t[1]}</button>`).join('')}
+      </div>
+      <div id="clubTabContent">${rosterTable(club.slug)}</div>
+    </div>
+  </section>`;
+}
+
+function pagePlayer(slug){
+  const p = PLAYERS.find(x=>x.slug===slug);
+  if(!p) return page404();
+  const club = clubBySlug(p.club);
+  return `
+  <section class="wrap"><div class="crumbs"><a href="#home">Start</a> / <a href="#zespoly">Zespoły</a> / <a href="#klub/${club.slug}">${club.name}</a> / ${p.name}</div></section>
+  <section class="player-hero wrap">
+    <div class="photo">${initials(p.name)}</div>
+    <div>
+      <div class="num">${p.number ? '#'+p.number : 'Bez numeru'}</div>
+      <h1>${p.name}${p.captain?' <span class="cap-tag">C</span>':''}</h1>
+      <div class="player-meta">
+        <div><span class="k">Obecna drużyna</span><span class="v">${club.name}</span></div>
+        <div><span class="k">Pozycja</span><span class="v">${p.position}</span></div>
+        <div><span class="k">Wiek</span><span class="v">${p.age ?? '—'}</span></div>
+        <div><span class="k">Funkcja</span><span class="v">${p.captain?'Kapitan drużyny':'—'}</span></div>
+        <div><span class="k">Narodowość</span><span class="v">${p.nationality || 'Polska'}</span></div>
+        <div><span class="k">Poprzednie drużyny</span><span class="v">—</span></div>
+        <div><span class="k">Sezony</span><span class="v">Jesień 2026</span></div>
+      </div>
+    </div>
+  </section>
+  <section class="section tight">
+    <div class="wrap">
+      <div class="section-head"><div><span class="tag">Statystyki</span><h2>Sezon Jesień 2026</h2></div></div>
+      <div class="stat-grid">
+        <div class="stat-box"><div class="val">0</div><div class="lab">Mecze</div></div>
+        <div class="stat-box"><div class="val">0</div><div class="lab">Bramki</div></div>
+        <div class="stat-box"><div class="val">0</div><div class="lab">Asysty</div></div>
+        <div class="stat-box"><div class="val">0</div><div class="lab">Żółte kartki</div></div>
+        <div class="stat-box"><div class="val">0</div><div class="lab">Czerwone kartki</div></div>
+      </div>
+    </div>
+  </section>`;
+}
+
+function matchStatsTable(clubSlug, club){
+  const list = playersOfClub(clubSlug);
+  if(!list.length){
+    return `<div class="table-wrap"><div class="empty-state" style="padding:34px 20px;">
+      <span class="mark">Kadra</span><h3 style="font-size:16px;">Skład zostanie uzupełniony</h3>
+    </div></div>`;
+  }
+  const rows = list.map(p=>`
+    <tr>
+      <td>${p.number ?? '-'}</td>
+      <td class="player" onclick="location.hash='#zawodnik/${p.slug}'">
+        <div class="avatar-sm">${initials(p.name)}</div>${p.name}${p.captain?' <span class="cap-tag">C</span>':''}
+      </td>
+      <td>${p.position}</td>
+      <td>0</td><td>0</td><td>0</td><td>0</td><td>—</td>
+    </tr>`).join('');
+  return `<div class="table-wrap"><table class="roster">
+    <thead><tr><th>#</th><th>Zawodnik</th><th>Pozycja</th><th>Br.</th><th>As.</th><th>ŻK</th><th>CK</th><th>Czyste konto</th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table></div>`;
+}
+
+function pageMatch(id){
+  const m = matchById(id);
+  if(!m) return page404();
+  const home = clubBySlug(m.home), away = clubBySlug(m.away);
+  return `
+  <section class="wrap"><div class="crumbs"><a href="#home">Start</a> / <a href="#terminarz">Terminarz</a> / ${home.name} – ${away.name}</div></section>
+  <section class="match-hero wrap">
+    <a class="match-side" href="#klub/${home.slug}">
+      <div class="match-crest">${crestTiny(home)}</div>
+      <h2>${home.name}</h2>
+    </a>
+    <div class="match-mid">
+      <span class="match-round">${m.league}. Liga · Kolejka ${m.round}</span>
+      <span class="match-vs">VS</span>
+      <span class="match-info">${m.dateRange}</span>
+      <span class="match-info">${m.venue}</span>
+    </div>
+    <a class="match-side" href="#klub/${away.slug}">
+      <div class="match-crest">${crestTiny(away)}</div>
+      <h2>${away.name}</h2>
+    </a>
+  </section>
+  <section class="section tight">
+    <div class="wrap">
+      <div class="section-head">
+        <div><span class="tag">Mecz</span><h2>MVP spotkania</h2></div>
+        <p>Nagroda zostanie przyznana po rozegraniu meczu.</p>
+      </div>
+      ${emptyPanel('MVP','Mecz jeszcze się nie odbył','MVP spotkania pojawi się tutaj po zakończeniu meczu.')}
+    </div>
+  </section>
+  <section class="section tight">
+    <div class="wrap">
+      <div class="section-head"><div><span class="tag">Kadra i statystyki</span><h2>${home.name}</h2></div></div>
+      ${matchStatsTable(home.slug)}
+    </div>
+  </section>
+  <section class="section tight">
+    <div class="wrap">
+      <div class="section-head"><div><span class="tag">Kadra i statystyki</span><h2>${away.name}</h2></div></div>
+      ${matchStatsTable(away.slug)}
+    </div>
+  </section>`;
+}
+
+function pageSchedule(){
+  return `
+  <section class="section">
+    <div class="wrap">
+      <div class="crumbs"><a href="#home">Start</a> / Terminarz</div>
+      <div class="section-head" style="margin-top:18px;">
+        <div><span class="tag">Kolejki</span><h2>Terminarz rozgrywek</h2></div>
+        <p>Kliknij w mecz, aby zobaczyć kadry i statystyki spotkania.</p>
+      </div>
+      <div class="section-head" style="border:none;padding:0;margin-bottom:16px;"><h3 style="font-size:18px;">1. Liga</h3></div>
+      ${fixturesList(1)}
+      <div class="section-head" style="border:none;padding:0;margin:34px 0 16px;"><h3 style="font-size:18px;">2. Liga</h3></div>
+      ${fixturesList(2)}
+    </div>
+  </section>`;
+}
+
+function pageInfo(){
+  return `
+  <section class="section">
+    <div class="wrap">
+      <div class="crumbs"><a href="#home">Start</a> / Informacje</div>
+      <div class="section-head" style="margin-top:18px;">
+        <div><span class="tag">O lidze</span><h2>Informacje</h2></div>
+      </div>
+      <div class="prose">
+        <h3>Czym jest OLZD</h3>
+        <p>Orlikowa Liga Ziemi Dobrzyńskiej to amatorskie rozgrywki piłki nożnej organizowane na obiektach typu Orlik. Celem ligi jest promowanie aktywności fizycznej, integracja lokalnej społeczności oraz zdrowa rywalizacja sportowa drużyn z regionu ziemi dobrzyńskiej.</p>
+        <h3>Struktura rozgrywek</h3>
+        <p>Rozgrywki podzielone są na dwie klasy: 1. Ligę oraz 2. Ligę. Szczegółowy terminarz i wyniki spotkań dostępne są w odpowiednich zakładkach na stronie.</p>
+        <h3>Polityka plików cookie</h3>
+        <p>Nasza strona wykorzystuje pliki cookie w celu zapewnienia jej prawidłowego funkcjonowania oraz zapamiętania Twoich preferencji podczas przeglądania. Nie wykorzystujemy plików cookie do celów reklamowych ani nie przekazujemy danych podmiotom trzecim. Korzystając ze strony, wyrażasz zgodę na ich stosowanie zgodnie z niniejszą informacją. W każdej chwili możesz zmienić ustawienia plików cookie w swojej przeglądarce internetowej.</p>
+        <h3>Kontakt</h3>
+        <p>W sprawach organizacyjnych, zgłoszeń drużyn oraz pytań dotyczących rozgrywek zapraszamy do kontaktu mailowego lub za pośrednictwem naszych social mediów.</p>
+        <div class="contact-strip">
+          <span>Masz pytania dotyczące ligi?</span>
+          <a href="mailto:orlikowaligaziemidobrzynskiej@onet.pl">orlikowaligaziemidobrzynskiej@onet.pl</a>
+        </div>
+      </div>
+    </div>
+  </section>`;
+}
+
+function pageRules(){
+  return `
+  <section class="section">
+    <div class="wrap">
+      <div class="crumbs"><a href="#home">Start</a> / Regulamin</div>
+      <div class="section-head" style="margin-top:18px;">
+        <div><span class="tag">Zasady gry</span><h2>Regulamin rozgrywek</h2></div>
+      </div>
+      <div class="prose">
+        <h3>1. Postanowienia ogólne</h3>
+        <p>Regulamin określa zasady organizacji oraz przebiegu rozgrywek Orlikowej Ligi Ziemi Dobrzyńskiej (OLZD). Udział w rozgrywkach jest jednoznaczny z akceptacją niniejszego regulaminu przez wszystkie zgłoszone drużyny.</p>
+        <h3>2. Zgłoszenia drużyn</h3>
+        <ul>
+          <li>Zgłoszenia drużyn przyjmowane są drogą mailową na adres kontaktowy ligi.</li>
+          <li>Każda drużyna zobowiązana jest do przedstawienia listy zawodników przed rozpoczęciem sezonu.</li>
+          <li>Liczba zespołów w poszczególnych klasach rozgrywkowych ustalana jest przez organizatora.</li>
+        </ul>
+        <h3>3. Punktacja</h3>
+        <ul>
+          <li>Zwycięstwo — 3 punkty</li>
+          <li>Remis — 1 punkt</li>
+          <li>Porażka — 0 punktów</li>
+        </ul>
+        <h3>4. Fair play</h3>
+        <p>Uczestnicy zobowiązani są do przestrzegania zasad fair play, szacunku wobec przeciwników, sędziów oraz kibiców. Wszelkie przypadki niesportowego zachowania będą rozpatrywane indywidualnie przez organizatora ligi.</p>
+        <h3>5. Postanowienia końcowe</h3>
+        <p>Organizator zastrzega sobie prawo do wprowadzania zmian w regulaminie w trakcie trwania sezonu, o czym drużyny zostaną poinformowane z odpowiednim wyprzedzeniem.</p>
+      </div>
+    </div>
+  </section>`;
+}
+
+function page404(){
+  return `<section class="section"><div class="wrap">${emptyPanel('404','Nie znaleziono strony','Sprawdź adres lub wróć do strony głównej.')}</div></section>`;
+}
+
+/* ================= ROUTER ================= */
+const app = document.getElementById('app');
+
+function setActiveNav(route){
+  document.querySelectorAll('nav.main a').forEach(a=>a.classList.toggle('active', a.dataset.route===route));
+}
+
+function render(){
+  const hash = location.hash || '#home';
+  const parts = hash.replace('#','').split('/');
+  let html = '', route='home';
+
+  if(parts[0]==='home' || hash==='#'){ html = pageHome(); route='home'; }
+  else if(parts[0]==='liga'){ html = pageLeague(parts[1]); route='liga'+parts[1]; }
+  else if(parts[0]==='zespoly'){ html = pageTeams(); route='zespoly'; }
+  else if(parts[0]==='klub'){ html = pageClub(parts[1]); route='zespoly'; }
+  else if(parts[0]==='zawodnik'){ html = pagePlayer(parts[1]); route='zespoly'; }
+  else if(parts[0]==='terminarz'){ html = pageSchedule(); route='terminarz'; }
+  else if(parts[0]==='mecz'){ html = pageMatch(parts[1]); route='terminarz'; }
+  else if(parts[0]==='informacje'){ html = pageInfo(); route='informacje'; }
+  else if(parts[0]==='regulamin'){ html = pageRules(); route='regulamin'; }
+  else { html = page404(); }
+
+  app.innerHTML = html;
+  setActiveNav(route);
+  window.scrollTo({top:0,behavior:'instant'in window?'instant':'auto'});
+  bindClubTabs();
+  observeFade();
+  closeMobileNav();
+}
+
+function bindClubTabs(){
+  const tabs = document.getElementById('clubTabs');
+  if(!tabs) return;
+  const content = document.getElementById('clubTabContent');
+  const slug = location.hash.split('/')[1];
+  tabs.querySelectorAll('button').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      tabs.querySelectorAll('button').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const key = btn.dataset.tab;
+      const club = clubBySlug(slug);
+      if(key==='ogolne') content.innerHTML = rosterTable(slug);
+      else if(key==='wyniki') content.innerHTML = emptyPanel('Wyniki','Brak rozegranych meczów','Ostatnie wyniki drużyny pojawią się tutaj po starcie sezonu.');
+      else if(key==='tabela') content.innerHTML = standingsTable(clubsOfLeague(club.league), club.league+'. Ligi', club.league);
+      else if(key==='terminarz') content.innerHTML = fixturesList(club.league, slug);
+    });
+  });
+}
+
+function observeFade(){
+  const els = document.querySelectorAll('.quick-card, .team-card');
+  if(!('IntersectionObserver' in window)){ els.forEach(e=>e.classList.add('in')); return; }
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
+  },{threshold:.15});
+  els.forEach(e=>io.observe(e));
+}
+
+window.addEventListener('hashchange', render);
+window.addEventListener('DOMContentLoaded', render);
+
+/* ================= MOBILE NAV ================= */
+const burger = document.getElementById('burgerBtn');
+const nav = document.getElementById('mainNav');
+burger.addEventListener('click', ()=> nav.classList.toggle('open'));
+function closeMobileNav(){ nav.classList.remove('open'); }
+
+/* ================= FOOTER YEAR ================= */
+document.getElementById('year').textContent = '© ' + new Date().getFullYear() + ' Orlikowa Liga Ziemi Dobrzyńskiej';
+
+/* ================= COOKIE BANNER ================= */
+function getCookie(name){
+  return document.cookie.split('; ').find(r=>r.startsWith(name+'='));
+}
+const banner = document.getElementById('cookieBanner');
+if(!getCookie('olzd_cookie_consent')){
+  setTimeout(()=>banner.classList.add('show'), 600);
+}
+document.getElementById('cookieAccept').addEventListener('click', ()=>{
+  document.cookie = 'olzd_cookie_consent=1; max-age=31536000; path=/';
+  banner.classList.remove('show');
+});
+</script>
+</body>
+</html>
